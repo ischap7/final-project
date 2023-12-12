@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://caxlvy1d58pws"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_5eoww"]
+[ext_resource type="PackedScene" uid="uid://r83wbk88svn6" path="res://view_model.tscn" id="2_nxnrd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_86afo"]
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_5eoww")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_86afo")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+cull_mask = 1048573
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="head/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="head/Camera3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="viewmodelcamera" parent="head/Camera3D/SubViewportContainer/SubViewport" instance=ExtResource("2_nxnrd")]
+cull_mask = 1047554
